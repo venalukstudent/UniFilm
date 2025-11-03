@@ -67,3 +67,63 @@ const SignUp = ({navigation}) => {
             onChangeText={setPassword}
             secureTextEntry
           />
+          <View style={styles.buttonGap} />
+
+          <Button label="Continue" onPress={handleContinue} />
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+export default SignUp;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingHorizontal: 24,
+    paddingBottom: 40,
+  },
+  profileContainer: {
+    alignItems: 'center',
+    marginTop: 40,
+    marginBottom: 60,
+  },
+  profileImageWrapper: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    overflow: 'hidden',
+    backgroundColor: '#F5F5F5',
+    zIndex: 2,
+  },
+  profileImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  profileBorder: {
+    position: 'absolute',
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    borderWidth: 2,
+    borderColor: '#8E9AAF',
+    borderStyle: 'dashed',
+  },
+  formContainer: {
+    flex: 1,
+  },
+  gap: {
+    height: 20,
+  },
+  buttonGap: {
+    height: 40,
+  },
+});
