@@ -37,3 +37,33 @@ const SignUp = ({navigation}) => {
           </View>
           <View style={styles.profileBorder} />
         </View>
+
+        <View style={styles.formContainer}>
+          <TextInput
+            label="Full Name"
+            placeholder="Type your full name"
+            value={fullName}
+            onChangeText={setFullName}
+            autoCapitalize="words"
+          />
+
+          <View style={styles.gap} />
+
+          <TextInput
+            label="Email Address"
+            placeholder="Type your email address"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+
+          <View style={styles.gap} />
+
+          <TextInput
+            label="Password"
+            placeholder="Type your password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
