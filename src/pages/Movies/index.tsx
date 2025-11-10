@@ -78,3 +78,57 @@ const MovieDetail = ({navigation}) => {
 };
 
 export default Movies;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#170038',
+  },
+  contentContainer: {
+    padding: 24,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+  },
+  tagWrapper: {
+    borderWidth: 1,
+    borderColor: '#FFFFFF',
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    marginRight: 8,
+  },
+  tagText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  ratingText: {
+    color: '#FBC81B',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  durationText: {
+    color: '#8D92A3',
+    fontSize: 16,
+    marginLeft: 16,
+  },
+  synopsisTitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  synopsisText: {
+    color: '#E0E0E0',
+    fontSize: 14,
+    lineHeight: 22,
+  },
+});
