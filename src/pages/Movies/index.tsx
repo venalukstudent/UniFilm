@@ -49,3 +49,32 @@ const MovieDetail = ({navigation}) => {
             <Text style={styles.durationText}>1j. 46m</Text>
           </View>
           <Gap height={24} />
+
+          <Text style={styles.synopsisTitle}>SINOPSIS</Text>
+          <Gap height={8} />
+          <Text style={styles.synopsisText}>
+            Benjamin Engel adalah seorang pemuda jenius komputer yang hidupnya
+            terasa hampa dan tak berarti. Ia sering merasa tak terlihat oleh
+            dunia, hingga suatu hari ia bertemu dengan Max, seorang hacker
+            karismatik yang memperkenalkannya pada dua teman lainnya, Stephan
+            dan Paul. Bersama-sama mereka membentuk kelompok hacker bernama CLAY
+            (Clowns Laughing At You).
+            {'\n\n'}
+            Awalnya, CLAY hanya melakukan peretasan iseng dan spektakuler untuk
+            mencari pengakuan publik. Namun, aksi mereka mulai menarik perhatian
+            organisasi hacker internasional berbahaya dan pihak Interpol,
+            terutama agen siber Hanne Lindberg, yang bertekad menangkap mereka.
+            {'\n\n'}
+            Semakin dalam Benjamin terlibat, semakin ia kehilangan kendali atas
+            batas antara dunia nyata dan dunia maya. Permainan identitas,
+            kebohongan, dan manipulasi pun dimulai—hingga akhirnya semua
+            mengarah pada pertanyaan besar: Siapa sebenarnya Benjamin, dan
+            seberapa jauh seseorang rela pergi demi diakui?
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+export default Movies;
