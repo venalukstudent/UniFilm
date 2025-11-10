@@ -1,28 +1,51 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  StatusBar,
-  // Hapus ImageBackground dan TouchableOpacity dari sini
-} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, StatusBar} from 'react-native';
 import Gap from '../../components/atoms/Gap';
-// 1. IMPORT Komponen Header yang baru
 import MovieDetailHeader from '../../components/molecules/Header';
 
 const MovieDetail = ({navigation}) => {
-  // Kita siapkan data untuk dikirim ke Header
   const movieImageUrl = require('../../assets/movies/Movies1.jpg');
 
   const handleBackPress = () => {
-    // Fungsi untuk tombol kembali
     if (navigation) {
       navigation.goBack();
     }
   };
 
   const handlePlayPress = () => {
-    // Fungsi untuk tombol play
     console.log('Play button pressed!');
   };
+
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <MovieDetailHeader
+          imageUri={movieImageUrl}
+          onBackPress={handleBackPress}
+          onPlayPress={handlePlayPress}
+        />
+
+        <View style={styles.contentContainer}>
+          <View style={styles.tagsContainer}>
+            <View style={styles.tagWrapper}>
+              <Text style={styles.tagText}>CRIME</Text>
+            </View>
+            <View style={styles.tagWrapper}>
+              <Text style={styles.tagText}>DRAMA</Text>
+            </View>
+            <View style={styles.tagWrapper}>
+              <Text style={styles.tagText}>MYSTERY</Text>
+            </View>
+          </View>
+          <Gap height={16} />
+
+          <Text style={styles.title}>Who Am I (2014)</Text>
+          <Gap height={8} />
+
+          <View style={styles.infoContainer}>
+            <Text style={styles.ratingText}>⭐ 7,5</Text>
+            <Text style={styles.durationText}>1j. 46m</Text>
+          </View>
+          <Gap height={24} />
