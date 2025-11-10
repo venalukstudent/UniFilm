@@ -22,3 +22,50 @@ const SeriesDetail = ({navigation}) => {
   const handlePlayPress = () => {
     console.log('Play button pressed!');
   };
+
+   return (
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <MovieDetailHeader
+          imageUri={seriesImageUrl}
+          onBackPress={handleBackPress}
+          onPlayPress={handlePlayPress}
+        />
+
+        <View style={styles.contentContainer}>
+          <Text style={styles.sectionTitle}>EPISODE</Text>
+          <Gap height={12} />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.episodeCard}>
+              <ImageBackground
+                source={require('../../assets/Series/Series1/eps1.png')}
+                style={styles.episodeImage}
+                imageStyle={styles.episodeImageRadius}>
+                <Text style={styles.episodeText}>EPS 1</Text>
+              </ImageBackground>
+              <Text style={styles.episodeDuration}>1:21:00</Text>
+            </View>
+            <Gap width={16} />
+            <View style={styles.episodeCard}>
+              <ImageBackground
+                source={require('../../assets/Series/Series1/eps2.png')}
+                style={styles.episodeImage}
+                imageStyle={styles.episodeImageRadius}>
+                <Text style={styles.episodeText}>EPS 2</Text>
+              </ImageBackground>
+              <Text style={styles.episodeDuration}>0:55:00</Text>
+            </View>
+            <Gap width={16} />
+            <View style={styles.episodeCard}>
+              <ImageBackground
+                source={require('../../assets/Series/Series1/eps3.png')}
+                style={styles.episodeImage}
+                imageStyle={styles.episodeImageRadius}>
+                <Text style={styles.episodeText}>EPS 3</Text>
+              </ImageBackground>
+              <Text style={styles.episodeDuration}>1:16:00</Text>
+            </View>
+          </ScrollView>
+          <Gap height={24} />
