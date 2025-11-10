@@ -114,3 +114,83 @@ const SeriesDetail = ({navigation}) => {
     </View>
   );
 };
+
+export default SeriesDetail;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#170038',
+  },
+  contentContainer: {
+    padding: 24,
+  },
+  sectionTitle: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  episodeCard: {
+    width: 150,
+  },
+  episodeImage: {
+    width: '100%',
+    height: 90,
+    justifyContent: 'flex-end',
+    padding: 8,
+  },
+  episodeImageRadius: {
+    borderRadius: 8,
+  },
+  episodeText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+  },
+  episodeDuration: {
+    color: '#8D92A3',
+    fontSize: 12,
+    marginTop: 4,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+  },
+  tagWrapper: {
+    borderWidth: 1,
+    borderColor: '#FFFFFF',
+    borderRadius: 20,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    marginRight: 8,
+  },
+  tagText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  ratingText: {
+    color: '#FBC81B',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  synopsisTitle: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  synopsisText: {
+    color: '#E0E0E0',
+    fontSize: 14,
+    lineHeight: 22,
+  },
+});
