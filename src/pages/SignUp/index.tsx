@@ -69,33 +69,33 @@ export default SignUp;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#170038', // Warna background sesuai permintaan
+    backgroundColor: '#170038',
   },
   scrollContent: {
     flexGrow: 1,
-    justifyContent: 'center', // Agar konten di tengah secara vertikal jika tidak penuh
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 50, // Memberi padding atas bawah
+    paddingVertical: 50,
   },
   logoWrapper: {
     alignItems: 'center',
-    marginBottom: 20, // Jarak ke bawah
+    marginBottom: 20,
   },
   appName: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#FFFFFF', // Warna teks putih
+    color: '#FFFFFF',
   },
   pageTitle: {
     fontSize: 32,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    alignSelf: 'center', // Pastikan di tengah
+    alignSelf: 'center',
   },
   formContainer: {
-    width: '85%', // Lebar form, bisa disesuaikan
+    width: '85%',
     alignSelf: 'center',
-    paddingHorizontal: 20, // Padding di sisi form
+    paddingHorizontal: 20,
   },
   footer: {
     flexDirection: 'row',
@@ -108,7 +108,55 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   loginLink: {
-    color: '#8D92A3', // Warna link Login
+    color: '#8D92A3',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#170038',
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 50,
+  },
+  logoWrapper: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  appName: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#FFFFFF',
+  },
+  pageTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    alignSelf: 'center',
+  },
+  formContainer: {
+    width: '85%',
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+  },
+  footer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  footerText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+  loginLink: {
+    color: '#8D92A3',
     fontSize: 14,
     fontWeight: 'bold',
   },
