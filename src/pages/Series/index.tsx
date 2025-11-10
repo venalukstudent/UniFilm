@@ -69,3 +69,24 @@ const SeriesDetail = ({navigation}) => {
             </View>
           </ScrollView>
           <Gap height={24} />
+
+          <View style={styles.tagsContainer}>
+            <View style={styles.tagWrapper}>
+              <Text style={styles.tagText}>Post-apocalyptic</Text>
+            </View>
+            <View style={styles.tagWrapper}>
+              <Text style={styles.tagText}>DRAMA</Text>
+            </View>
+            <View style={styles.tagWrapper}>
+              <Text style={styles.tagText}>ACTION</Text>
+            </View>
+          </View>
+          <Gap height={16} />
+
+          <Text style={styles.title}>The Last of Us</Text>
+          <Gap height={8} />
+
+          <View style={styles.infoContainer}>
+            <Text style={styles.ratingText}>⭐ 8,2</Text>
+          </View>
+          <Gap height={24} />
