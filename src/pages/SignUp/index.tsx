@@ -29,3 +29,23 @@ const SignUp = ({navigation}) => {
           <Logo width={200} height={200} />{' '}
         </View>
         <Gap height={10} />
+        <Text style={styles.pageTitle}>Sign Up</Text>
+        <Gap height={30} />
+        <View style={styles.formContainer}>
+          <TextInput
+            label="Email"
+            placeholder="Enter your email address"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+          />
+          <Gap height={16} />
+
+          <TextInput
+            label="Password"
+            placeholder="Enter your password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <Gap height={30} />
