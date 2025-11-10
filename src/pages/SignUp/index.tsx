@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 import TextInput from '../../components/molecules/TextInput';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
-import Logo from '../../assets/Logo.svg'; 
+import Logo from '../../assets/Logo.svg';
 
 const SignUp = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -49,3 +49,19 @@ const SignUp = ({navigation}) => {
             secureTextEntry
           />
           <Gap height={30} />
+
+          <Button title="Sign Up" onPress={onSignUp} />
+        </View>
+        <Gap height={20} />
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => console.log('Go to Login')}>
+            <Text style={styles.loginLink}> Log in</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+export default SignUp;
