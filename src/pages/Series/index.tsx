@@ -23,7 +23,7 @@ const SeriesDetail = ({navigation}) => {
     console.log('Play button pressed!');
   };
 
-   return (
+  return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
 
@@ -90,3 +90,27 @@ const SeriesDetail = ({navigation}) => {
             <Text style={styles.ratingText}>⭐ 8,2</Text>
           </View>
           <Gap height={24} />
+
+          <Text style={styles.synopsisTitle}>SINOPSIS</Text>
+          <Gap height={8} />
+          <Text style={styles.synopsisText}>
+            Dua puluh tahun setelah dunia dihancurkan oleh wabah jamur Cordyceps
+            yang mengubah manusia menjadi makhluk ganas seperti zombie, seorang
+            penyintas keras bernama Joel Miller diberi tugas berbahaya:
+            mengantarkan seorang remaja bernama Ellie Williams melintasi Amerika
+            Serikat yang hancur. Ellie ternyata kebal terhadap infeksi, dan
+            mungkin menjadi kunci untuk menemukan obat bagi umat manusia.
+            Perjalanan mereka dipenuhi bahaya — bukan hanya dari para
+            “terinfeksi”, tetapi juga dari manusia lain yang kejam dan putus
+            asa. Di tengah kekacauan dunia pasca-apokaliptik, Joel dan Ellie
+            perlahan membangun ikatan layaknya ayah dan anak, yang diuji oleh
+            kehilangan, pengkhianatan, dan pilihan-pilihan moral yang sulit.
+            Serial ini menggambarkan perjuangan manusia untuk bertahan hidup dan
+            tetap memiliki harapan di dunia yang runtuh, dengan tema mendalam
+            tentang cinta, kehilangan, dan kemanusiaan.
+          </Text>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
