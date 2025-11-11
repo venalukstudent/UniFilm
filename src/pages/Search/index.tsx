@@ -65,3 +65,18 @@ const Search = () => {
     }
     return <View style={{flexDirection: 'row'}}>{stars}</View>;
   };
+
+  const renderItem = ({item}) => (
+    <View style={styles.card}>
+      <Image source={item.image} style={styles.image} />
+      <View style={styles.info}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.date}>{item.date}</Text>
+        <Text style={styles.duration}>{item.duration}</Text>
+        {renderStars(item.rating)}
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Watch now</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
