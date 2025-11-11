@@ -48,3 +48,17 @@ const SignUp = ({navigation}) => {
             secureTextEntry
           />
           <Gap height={30} />
+           
+           <Button title="Sign Up" onPress={onSignUp} />
+        </View>
+        <Gap height={20} />
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => console.log('Go to Login')}>
+            <Text style={styles.loginLink}> Sign In</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
