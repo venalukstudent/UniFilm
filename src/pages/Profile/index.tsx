@@ -16,3 +16,21 @@ const ProfileMenuItem = ({ IconComponent, text, onPress }) => {
     </TouchableOpacity>
   );
 };
+
+
+const Profile = () => {
+  const handleAction = (action) => {
+    Alert.alert("Aksi", `Navigasi atau eksekusi: ${action}`);
+  };
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          <View style={styles.profileCard}>
+            <Image source={UserProfileImage} style={styles.profileImage} />
+            <View style={styles.profileTextContainer}>
+              <Text style={styles.greetingText}>Hi Adam,</Text> 
+              <Text style={styles.questionText}>What movie do you want to watch today?</Text>
+            </View>
+          </View>
