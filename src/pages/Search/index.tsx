@@ -80,3 +80,10 @@ const Search = () => {
       </View>
     </View>
   );
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="arrow-back" size={28} color="#fff" />
+        </TouchableOpacity>
+      </View>
