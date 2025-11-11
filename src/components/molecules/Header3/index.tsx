@@ -6,7 +6,7 @@ const Header3 = (props) => {
   const { title = 'Genres', onBackPress } = props;
 
   return (
-    <View style={styles.container}>
+     <View style={styles.container}>
       <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
         <BackIcon width={24} height={24} fill="white" />
       </TouchableOpacity>
