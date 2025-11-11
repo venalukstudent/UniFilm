@@ -62,3 +62,52 @@ const SignUp = ({navigation}) => {
     </View>
   );
 };
+export default SignUp;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#170038', // Warna background sesuai permintaan
+  },
+  scrollContent: {
+    flexGrow: 1,
+    justifyContent: 'center', // Agar konten di tengah secara vertikal jika tidak penuh
+    alignItems: 'center',
+    paddingVertical: 50, // Memberi padding atas bawah
+  },
+  logoWrapper: {
+    alignItems: 'center',
+    marginBottom: 20, // Jarak ke bawah
+  },
+  appName: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#FFFFFF', // Warna teks putih
+  },
+  pageTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    alignSelf: 'center', // Pastikan di tengah
+  },
+  formContainer: {
+    width: '85%', // Lebar form, bisa disesuaikan
+    alignSelf: 'center',
+    paddingHorizontal: 20, // Padding di sisi form
+  },
+  footer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  footerText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+  loginLink: {
+    color: '#8D92A3', // Warna link Login
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+});
