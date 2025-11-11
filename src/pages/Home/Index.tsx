@@ -117,3 +117,68 @@ const Home = ({navigation}) => {
     </View>
   );
 };
+
+export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#170038',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+  },
+  logo: {
+    width: 60,
+    height: 60,
+    resizeMode: 'contain',
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 16,
+    marginTop: 16,
+  },
+  sectionTitle: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  seeAll: {
+    color: '#FF8C00',
+    fontSize: 12,
+  },
+  movieCard: {
+    marginRight: 12,
+    width: 140,
+  },
+  movieImage: {
+    width: 140,
+    height: 200,
+    borderRadius: 12,
+  },
+  movieTitle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginTop: 6,
+  },
+  movieRating: {
+    color: '#FFD700',
+    fontSize: 11,
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#ff8c00',
+    paddingVertical: 12,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+});
