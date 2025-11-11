@@ -46,3 +46,22 @@ const DATA = [
     image: require('../../assets/despicable.jpg'),
   },
 ];
+const Search = () => {
+  const [query, setQuery] = useState('');
+
+  const filteredData = DATA.filter(item =>
+    item.title.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  const renderStars = rating => {
+    const totalStars = 5;
+    let stars = [];
+    for (let i = 1; i <= totalStars; i++) {
+      stars.push(
+        <Text key={i} style={{color: i <= rating ? 'orange' : 'gray'}}>
+          ★
+        </Text>,
+      );
+    }
+    return <View style={{flexDirection: 'row'}}>{stars}</View>;
+  };
