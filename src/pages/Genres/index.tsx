@@ -19,3 +19,48 @@ const GenresData = [
   { id: '6', name: 'Tatutup', display: 'mystery', 
     image: require('../../assets/Genres/mystery.png') }, 
 ];
+
+
+const GenreItem = ({ name, image, onPress }) => {
+  return (
+    <TouchableOpacity style={styles.genreButton} onPress={onPress}>
+      <Image
+        
+        source={image} 
+        style={styles.genreImage}
+        resizeMode="cover"
+      />
+      <View style={styles.textOverlay}>
+        <Text style={styles.genreText}>{name}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const Genres = ({ navigation }) => {
+  
+  const handleBack = () => {
+    Alert.alert("Navigasi", "Fungsi Kembali");
+  };
+  
+  const handleGenrePress = (genreName) => {
+    Alert.alert("Genre Dipilih", `Anda memilih genre: ${genreName}`);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Header3 title="Genres" onBackPress={handleBack} />
+
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        {GenresData.map((genre) => (
+          <GenreItem 
+            key={genre.id}
+            name={genre.display}
+            image={genre.image}
+            onPress={() => handleGenrePress(genre.name)}
+          />
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
