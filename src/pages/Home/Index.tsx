@@ -98,3 +98,22 @@ const Home = ({navigation}) => {
           contentContainerStyle={{paddingHorizontal: 16}}
         />
       </ScrollView>
+
+      {/* Bottom Navigation */}
+      <View style={styles.bottomNav}>
+        <TouchableOpacity>
+          <Icon name="home" size={26} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Icon name="search-outline" size={26} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Icon name="play-circle" size={26} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Icon name="settings-outline" size={26} color="white" />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
