@@ -49,3 +49,71 @@ const Profile = () => {
     </SafeAreaView>
   );
 };
+
+export default Profile;
+
+// --- Stylesheet ---
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#1C0E3C',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#1C0E3C', 
+  },
+  scrollContent: {
+    paddingBottom: 20,
+  },
+  profileCard: {
+    backgroundColor: '#FF8C4B', 
+    padding: 20,
+    margin: 15,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  profileImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40, 
+    borderWidth: 3,
+    borderColor: 'white',
+    marginRight: 15,
+  },
+  profileTextContainer: {
+    flex: 1,
+  },
+  greetingText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    lineHeight: 22, 
+  },
+  questionText: {
+    color: 'white',
+    fontSize: 16,
+    lineHeight: 22, 
+  },
+  menuContainer: {
+    marginHorizontal: 15,
+    marginTop: 20,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FF8C4B', 
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+    minHeight: 60, 
+  },
+  menuIcon: {
+    marginRight: 15,
+  },
+  menuText: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+});
