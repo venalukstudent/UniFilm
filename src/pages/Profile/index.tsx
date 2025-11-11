@@ -34,3 +34,18 @@ const Profile = () => {
               <Text style={styles.questionText}>What movie do you want to watch today?</Text>
             </View>
           </View>
+
+          <View style={styles.menuContainer}>
+            <ProfileMenuItem IconComponent={LikesIcon} text="Likes Films" onPress={() => handleAction('LikesFilms')} />
+            <ProfileMenuItem IconComponent={DownloadsIcon} text="Downloads" onPress={() => handleAction('Downloads')} />
+            <ProfileMenuItem IconComponent={HistoryIcon} text="History" onPress={() => handleAction('History')} />
+            <ProfileMenuItem IconComponent={LogoutIcon} text="Logout" onPress={() => handleAction('Logout')} />
+          </View>
+        </ScrollView>
+
+        
+        <Footer /> 
+      </View>
+    </SafeAreaView>
+  );
+};
