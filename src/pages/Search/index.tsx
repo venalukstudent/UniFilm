@@ -87,3 +87,23 @@ const Search = () => {
           <Icon name="arrow-back" size={28} color="#fff" />
         </TouchableOpacity>
       </View>
+
+      <View style={styles.content}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search"
+          placeholderTextColor="#aaa"
+          value={query}
+          onChangeText={text => setQuery(text)}
+        />
+        <Gap height={16} />
+        <FlatList
+          data={filteredData}
+          keyExtractor={item => item.id}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </View>
+  );
+};
