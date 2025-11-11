@@ -64,3 +64,42 @@ const Genres = ({ navigation }) => {
     </View>
   );
 };
+
+export default Genres;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1C0E3C',
+  },
+  scrollContent: {
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+  },
+  genreButton: {
+    width: ITEM_WIDTH,
+    height: 120,
+    borderRadius: 10,
+    marginBottom: 15,
+    overflow: 'hidden', 
+  },
+  genreImage: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    opacity: 0.7,
+  },
+  textOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  genreText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    textShadowColor: 'rgba(0, 0, 0, 0.9)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 5,
+  },
+});
