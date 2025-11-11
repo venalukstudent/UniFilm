@@ -63,3 +63,10 @@ const Home = ({navigation}) => {
       <Text style={styles.movieRating}>RATING ⭐ {item.rating}</Text>
     </View>
   );
+
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Image source={require('../../assets/logo.png')} style={styles.logo} />
+      </View>
