@@ -107,3 +107,77 @@ const Search = () => {
     </View>
   );
 };
+
+export default Search;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#170038',
+  },
+  content: {
+    paddingHorizontal: 16,
+    paddingTop: 20,
+    flex: 1,
+  },
+  searchInput: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    fontSize: 16,
+  },
+  card: {
+    flexDirection: 'row',
+    backgroundColor: '#2D004D',
+    borderRadius: 16,
+    padding: 10,
+    marginBottom: 16,
+  },
+  image: {
+    width: 90,
+    height: 130,
+    borderRadius: 10,
+  },
+  info: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  date: {
+    fontSize: 14,
+    color: '#ddd',
+  },
+  duration: {
+    fontSize: 13,
+    color: '#bbb',
+    marginBottom: 4,
+  },
+  button: {
+    marginTop: 6,
+    backgroundColor: 'orange',
+    borderRadius: 20,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    alignSelf: 'flex-start',
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  header: {
+    backgroundColor: 'orange',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+  },
+  backArrow: {
+    color: '#fff',
+    fontSize: 26,
+    fontWeight: 'bold',
+  },
+});
