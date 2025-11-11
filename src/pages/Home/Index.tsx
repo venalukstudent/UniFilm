@@ -70,3 +70,31 @@ const Home = ({navigation}) => {
       <View style={styles.header}>
         <Image source={require('../../assets/logo.png')} style={styles.logo} />
       </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Section 1 */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>BARU TAYANG HARI INI</Text>
+        </View>
+        <FlatList
+          data={newMovies}
+          renderItem={renderMovie}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 16}}
+        />
+
+        {/* Section 2 */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>TONTON FILM LAINNYA</Text>
+        </View>
+        <FlatList
+          data={otherMovies}
+          renderItem={renderMovie}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 16}}
+        />
+      </ScrollView>
