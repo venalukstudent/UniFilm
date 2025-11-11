@@ -53,3 +53,13 @@ const Home = ({navigation}) => {
       image: require('../../assets/mrrobot.jpg'),
     },
   ];
+
+  const renderMovie = ({item}) => (
+    <View style={styles.movieCard}>
+      <Image source={item.image} style={styles.movieImage} />
+      <Text style={styles.movieTitle} numberOfLines={1}>
+        {item.title}
+      </Text>
+      <Text style={styles.movieRating}>RATING ⭐ {item.rating}</Text>
+    </View>
+  );
