@@ -46,7 +46,7 @@ const DATA = [
     image: require('../../assets/despicable.jpg'),
   },
 ];
-const Search = () => {
+const Search = ({navigation}) => {
   const [query, setQuery] = useState('');
 
   const filteredData = DATA.filter(item =>
