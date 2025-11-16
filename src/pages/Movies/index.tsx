@@ -77,7 +77,7 @@ const MovieDetail = ({navigation}) => {
   );
 };
 
-export default Movies;
+export default MovieDetail;
 
 const styles = StyleSheet.create({
   container: {
