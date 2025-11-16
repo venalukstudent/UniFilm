@@ -1,24 +1,48 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-const Header = ({label}) => {
+import BackArrow from '../../../assets/backarrow.svg';
+import Play from '../../../assets/play.svg';
+
+const MovieDetailHeader = ({imageUri, onBackPress}) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{label}</Text>
-    </View>
+    <ImageBackground source={imageUri} style={styles.headerImage}>
+      <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
+        <BackArrow width={20} height={20} />
+      </TouchableOpacity>
+      <View style={styles.playIconWrapper}>
+        <Play width={40} height={40} />{' '}
+      </View>
+    </ImageBackground>
   );
 };
 
-export default Header;
+export default MovieDetailHeader;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFFFFF',
+  headerImage: {
+    width: '100%',
+    height: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  text: {
-    fontFamily: 'Poppins-Medium',
-    fontSize: 22,
-    paddingLeft: 24,
-    paddingVertical: 37,
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  playIconWrapper: {
+    paddingLeft: 4,
   },
 });

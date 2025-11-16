@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const Button = ({label, color = '#02CF8E', textColor = '#020202'}) => {
+const Button = ({title, color = 'rgb(77, 77, 255)', textColor = '#FFFFFF'}) => {
   return (
     <TouchableOpacity style={styles.button(color)} activeOpacity={0.5}>
-      <Text style={styles.text(textColor)}>{label}</Text>
+      <Text style={styles.text(textColor)}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -16,11 +16,12 @@ const styles = StyleSheet.create({
     backgroundColor: color,
     padding: 12,
     borderRadius: 8,
+    alignItems: 'center',
   }),
   text: textColor => ({
     textAlign: 'center',
     fontFamily: 'Poppins-Medium',
-    fontSize: 14,
+    fontSize: 20,
     color: textColor,
   }),
 });

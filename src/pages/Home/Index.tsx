@@ -109,7 +109,7 @@ const Home = ({navigation}) => {
           <Icon name="search-outline" size={26} color="white" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Genres')}>
           <Icon name="play-circle" size={26} color="white" />
         </TouchableOpacity>
 

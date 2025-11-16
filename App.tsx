@@ -8,6 +8,10 @@ import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 import Home from './src/pages/Home';
 import Search from './src/pages/Search';
+import Series from './src/pages/Series';
+import Profile from './src/pages/Profile';
+import Movies from './src/pages/Movies';
+import Genres from './src/pages/Genres';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +42,26 @@ const App = () => {
         <Stack.Screen
           name="Search"
           component={Search}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Series"
+          component={Series}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Movies"
+          component={Movies}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Genres"
+          component={Genres}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
