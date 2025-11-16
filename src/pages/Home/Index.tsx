@@ -101,16 +101,19 @@ const Home = ({navigation}) => {
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Icon name="home" size={26} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <Icon name="search-outline" size={26} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Icon name="play-circle" size={26} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Icon name="settings-outline" size={26} color="white" />
         </TouchableOpacity>
       </View>
