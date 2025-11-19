@@ -1,75 +1,62 @@
-import {StyleSheet, View, ScrollView, Image} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Image,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import TextInput from '../../components/molecules/TextInput';
 import Button from '../../components/atoms/Button';
-import HeaderSvg from '../../assets/header.svg';
+import Gap from '../../components/atoms/Gap';
+import Logo from '../../assets/Logo.svg';
 
 const SignUp = ({navigation}) => {
-  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleContinue = () => {
-    // Validasi sederhana
-    if (!fullName || !email || !password) {
-      alert('Please fill all fields');
-      return;
-    }
-
-    // TODO: Implementasi API call untuk registrasi
-    console.log('Sign Up Data:', {fullName, email, password});
-  };
-
   return (
     <View style={styles.container}>
-      <HeaderSvg width="100%" height={80} />
-
       <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}>
-        <View style={styles.profileContainer}>
-          <View style={styles.profileImageWrapper}>
-            <Image
-              source={require('../../assets/null-photo 1.png')}
-              style={styles.profileImage}
-            />
-          </View>
-          <View style={styles.profileBorder} />
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.logoWrapper}>
+          <Logo width={200} height={200} />{' '}
         </View>
-
+        <Gap height={10} />
+        <Text style={styles.pageTitle}>Sign Up</Text>
+        <Gap height={30} />
         <View style={styles.formContainer}>
           <TextInput
-            label="Full Name"
-            placeholder="Type your full name"
-            value={fullName}
-            onChangeText={setFullName}
-            autoCapitalize="words"
-          />
-
-          <View style={styles.gap} />
-
-          <TextInput
-            label="Email Address"
-            placeholder="Type your email address"
+            label="Email"
+            placeholder="Enter your email address"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
-            autoCapitalize="none"
           />
-
-          <View style={styles.gap} />
+          <Gap height={16} />
 
           <TextInput
             label="Password"
-            placeholder="Type your password"
+            placeholder="Enter your password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
           />
-          <View style={styles.buttonGap} />
+          <Gap height={30} />
 
-          <Button label="Continue" onPress={handleContinue} />
+          <Button
+            title="Sign Up"
+            onPress={() => navigation.navigate('SignIn')}
+          />
+        </View>
+        <Gap height={20} />
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Already have an account?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
+            <Text style={styles.loginLink}> Log in</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -81,49 +68,47 @@ export default SignUp;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  scrollView: {
-    flex: 1,
+    backgroundColor: '#170038',
   },
   scrollContent: {
-    paddingHorizontal: 24,
-    paddingBottom: 40,
-  },
-  profileContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
-    marginBottom: 60,
+    paddingVertical: 50,
   },
-  profileImageWrapper: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    overflow: 'hidden',
-    backgroundColor: '#F5F5F5',
-    zIndex: 2,
+  logoWrapper: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
-  profileImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+  appName: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
-  profileBorder: {
-    position: 'absolute',
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    borderWidth: 2,
-    borderColor: '#8E9AAF',
-    borderStyle: 'dashed',
+  pageTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    alignSelf: 'center',
   },
   formContainer: {
-    flex: 1,
+    width: '85%',
+    alignSelf: 'center',
+    paddingHorizontal: 20,
   },
-  gap: {
-    height: 20,
+  footer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  buttonGap: {
-    height: 40,
+  footerText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+  },
+  loginLink: {
+    color: '#8D92A3',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
 });
