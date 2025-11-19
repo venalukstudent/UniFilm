@@ -11,4 +11,4 @@ import Genres from './src/pages/Genres';
 import Movies from './src/pages/Movies';
 import Series from './src/pages/Series';
 
-AppRegistry.registerComponent(appName, () => Series);
+AppRegistry.registerComponent(appName, () => Profile);
