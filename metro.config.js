@@ -1,24 +1,29 @@
+// metro.config.js
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
-const defaultConfig = getDefaultConfig(__dirname);
-const {assetExts, sourceExts} = defaultConfig.resolver;
+module.exports = (async () => {
+  const defaultConfig = await getDefaultConfig(__dirname);
 
-/**
- * Metro configuration
- * https://reactnative.dev/docs/metro
- *
- * @type {import('metro-config').MetroConfig}
- */
-const config = {
-  transformer: {
-    babelTransformerPath: require.resolve(
-      'react-native-svg-transformer/react-native',
-    ),
-  },
-  resolver: {
-    assetExts: assetExts.filter(ext => ext !== 'svg'),
-    sourceExts: [...sourceExts, 'svg'],
-  },
-};
+  // safe extract (struktur bisa berbeda antar versi metro)
+  const resolver = defaultConfig.resolver || {};
+  const assetExts = resolver.assetExts || [];
+  const sourceExts = resolver.sourceExts || [];
 
-module.exports = mergeConfig(defaultConfig, config);
+  const config = {
+    transformer: {
+      // gunakan yang biasa dipakai oleh svg transformer
+      babelTransformerPath: require.resolve(
+        'react-native-svg-transformer/react-native',
+      ),
+    },
+    resolver: {
+      assetExts: assetExts.filter(ext => ext !== 'svg'),
+      // tambahkan ext yang diperlukan termasuk ts/tsx
+      sourceExts: [
+        ...new Set([...sourceExts, 'ts', 'tsx', 'js', 'jsx', 'svg']),
+      ],
+    },
+  };
+
+  return mergeConfig(defaultConfig, config);
+})();
