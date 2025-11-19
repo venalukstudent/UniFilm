@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   genreImage: {
-    width: '100%',
-    height: '100%',
+    width: 373,
+    height: 114,
     position: 'absolute',
     opacity: 0.7,
   },

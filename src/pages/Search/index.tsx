@@ -58,7 +58,9 @@ const Search = ({navigation}) => {
     let stars = [];
     for (let i = 1; i <= totalStars; i++) {
       stars.push(
-        <Text key={i} style={{color: i <= rating ? 'orange' : 'gray'}}>
+        <Text
+          key={i}
+          style={{color: i <= rating ? 'orange' : 'gray', fontSize: 25}}>
           ★
         </Text>,
       );
@@ -119,6 +121,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 20,
     flex: 1,
+    fontSize: 22,
   },
   searchInput: {
     backgroundColor: '#fff',
@@ -126,6 +129,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     fontSize: 16,
+    width: 388,
+    height: 49,
+    borderEndEndRadius: 49,
   },
   card: {
     flexDirection: 'row',
@@ -135,25 +141,26 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   image: {
-    width: 90,
-    height: 130,
+    width: 146,
+    height: 204,
     borderRadius: 10,
   },
   info: {
     flex: 1,
     marginLeft: 12,
+    fontSize: 30,
   },
   title: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',
   },
   date: {
-    fontSize: 14,
+    fontSize: 22,
     color: '#ddd',
   },
   duration: {
-    fontSize: 13,
+    fontSize: 17,
     color: '#bbb',
     marginBottom: 4,
   },
@@ -164,20 +171,30 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 14,
     alignSelf: 'flex-start',
+    width: 204,
+    height: 48,
+    borderEndEndRadius: 28,
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+    fontSize: 17,
+    justifyContent: 'center',
   },
   header: {
     backgroundColor: 'orange',
     paddingVertical: 16,
     paddingHorizontal: 20,
     justifyContent: 'center',
+    width: 412,
+    height: 60,
+    borderRadius: 0,
   },
   backArrow: {
     color: '#fff',
     fontSize: 26,
     fontWeight: 'bold',
+    width: 28,
+    height: 27,
   },
 });

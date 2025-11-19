@@ -12,13 +12,15 @@ import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
 import Logo from '../../assets/Logo.svg';
 
-const SignUp = ({navigation}) => {
+const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSignUp = () => {
-    console.log('Sign Up Data:', {email, password});
+  const onSignIn = () => {
+    console.log('Sign In Data:', {email, password});
+    navigation.navigate('Home');
   };
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -49,12 +51,12 @@ const SignUp = ({navigation}) => {
           />
           <Gap height={30} />
 
-          <Button title="Login" onPress={onSignUp} />
+          <Button title="Login" onPress={onSignIn} />
         </View>
         <Gap height={20} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => console.log('Go to Login')}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={styles.loginLink}> Sign Up</Text>
           </TouchableOpacity>
         </View>
@@ -62,7 +64,7 @@ const SignUp = ({navigation}) => {
     </View>
   );
 };
-export default SignUp;
+export default SignIn;
 
 const styles = StyleSheet.create({
   container: {

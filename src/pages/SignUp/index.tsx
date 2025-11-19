@@ -16,10 +16,6 @@ const SignUp = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSignUp = () => {
-    console.log('Sign Up Data:', {email, password});
-  };
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -50,12 +46,15 @@ const SignUp = ({navigation}) => {
           />
           <Gap height={30} />
 
-          <Button title="Sign Up" onPress={onSignUp} />
+          <Button
+            title="Sign Up"
+            onPress={() => navigation.navigate('SignIn')}
+          />
         </View>
         <Gap height={20} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => console.log('Go to Login')}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignIn')}>
             <Text style={styles.loginLink}> Log in</Text>
           </TouchableOpacity>
         </View>

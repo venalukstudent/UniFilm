@@ -55,13 +55,15 @@ const Home = ({navigation}) => {
   ];
 
   const renderMovie = ({item}) => (
-    <View style={styles.movieCard}>
+    <TouchableOpacity
+      style={styles.movieCard}
+      onPress={() => navigation.navigate('Movies', {movie: item})}>
       <Image source={item.image} style={styles.movieImage} />
       <Text style={styles.movieTitle} numberOfLines={1}>
         {item.title}
       </Text>
       <Text style={styles.movieRating}>RATING ⭐ {item.rating}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -113,8 +115,8 @@ const Home = ({navigation}) => {
           <Icon name="play-circle" size={26} color="white" />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Icon name="settings-outline" size={26} color="white" />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Icon name="person-circle-outline" size={26} color="white" />
         </TouchableOpacity>
       </View>
     </View>
@@ -136,9 +138,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   logo: {
-    width: 60,
-    height: 60,
+    width: 64,
+    height: 64,
     resizeMode: 'contain',
+    borderRadius: 28,
   },
   sectionHeader: {
     flexDirection: 'row',
@@ -158,11 +161,11 @@ const styles = StyleSheet.create({
   },
   movieCard: {
     marginRight: 12,
-    width: 140,
+    width: 146,
   },
   movieImage: {
-    width: 140,
-    height: 200,
+    width: 146,
+    height: 204,
     borderRadius: 12,
   },
   movieTitle: {
@@ -183,5 +186,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    width: 406,
+    height: 77,
+    borderRadius: 30,
   },
 });
