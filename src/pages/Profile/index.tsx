@@ -15,6 +15,8 @@ import LikesIcon from '../../assets/IconContent/likes.svg';
 import DownloadsIcon from '../../assets/IconContent/downloads.svg';
 import HistoryIcon from '../../assets/IconContent/history.svg';
 import LogoutIcon from '../../assets/IconContent/logout.svg';
+import {auth} from '../../../config/firebase';
+import {signOut} from 'firebase/auth';
 
 const ProfileMenuItem = ({IconComponent, text, onPress}) => {
   return (
@@ -32,6 +34,26 @@ const ProfileMenuItem = ({IconComponent, text, onPress}) => {
 
 const Profile = ({navigation}) => {
   const handleAction = action => {
+    if (action === 'Logout') {
+      Alert.alert('Logout', 'Are you sure you want to logout?', [
+        {text: 'Cancel', style: 'cancel'},
+        {
+          text: 'Yes',
+          onPress: async () => {
+            try {
+              await signOut(auth);
+              navigation.replace('SignIn');
+            } catch (err) {
+              const error = err as any;
+              console.error('Logout error:', error);
+              Alert.alert('Error', error?.message || 'Failed to logout');
+            }
+          },
+        },
+      ]);
+      return;
+    }
+
     Alert.alert('Aksi', `Navigasi atau eksekusi: ${action}`);
   };
 
