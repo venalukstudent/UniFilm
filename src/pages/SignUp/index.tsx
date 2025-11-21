@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
+import {Alert} from 'react-native';
+import {ref, set} from 'firebase/database';
+import {database, auth} from '../../../config/firebase';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import TextInput from '../../components/molecules/TextInput';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
@@ -15,6 +19,39 @@ import Logo from '../../assets/Logo.svg';
 const SignUp = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleSignUp = async () => {
+    if (!email || !password) {
+      Alert.alert('Validation', 'Please enter email and password');
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const uid = userCredential.user.uid;
+
+      // Save minimal user info under users/{uid}
+      const userRef = ref(database, `users/${uid}`);
+      await set(userRef, {
+        uid,
+        email,
+        createdAt: Date.now(),
+      });
+
+      Alert.alert('Success', 'Account created');
+      navigation.navigate('SignIn');
+    } catch (err) {
+      const error = err as any;
+      console.error('SignUp error:', error);
+      const message =
+        error?.message || error?.code || 'Failed to create account';
+      Alert.alert('Error', message);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -46,10 +83,7 @@ const SignUp = ({navigation}) => {
           />
           <Gap height={30} />
 
-          <Button
-            title="Sign Up"
-            onPress={() => navigation.navigate('SignIn')}
-          />
+          <Button title="Sign Up" onPress={handleSignUp} />
         </View>
         <Gap height={20} />
         <View style={styles.footer}>

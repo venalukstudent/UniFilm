@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
+import {Alert} from 'react-native';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../../../config/firebase';
 import TextInput from '../../components/molecules/TextInput';
 import Button from '../../components/atoms/Button';
 import Gap from '../../components/atoms/Gap';
@@ -16,9 +19,20 @@ const SignIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSignIn = () => {
-    console.log('Sign In Data:', {email, password});
-    navigation.navigate('Home');
+  const onSignIn = async () => {
+    if (!email || !password) {
+      Alert.alert('Validation', 'Please enter email and password');
+      return;
+    }
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.navigate('Home');
+    } catch (err) {
+      const error = err as any;
+      console.error('SignIn error:', error);
+      const message = error?.message || error?.code || 'Login failed';
+      Alert.alert('Error', message);
+    }
   };
 
   return (
