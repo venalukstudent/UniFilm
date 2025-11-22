@@ -15,10 +15,12 @@ import LikesIcon from '../../assets/IconContent/likes.svg';
 import DownloadsIcon from '../../assets/IconContent/downloads.svg';
 import HistoryIcon from '../../assets/IconContent/history.svg';
 import LogoutIcon from '../../assets/IconContent/logout.svg';
-import {auth} from '../../../config/firebase';
+import {auth, database} from '../../../config/firebase';
 import {signOut} from 'firebase/auth';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {push} from 'firebase/database';
 import {showMessage} from 'react-native-flash-message';
+import {ref as dbRef, set} from 'firebase/database';
 
 const ProfileMenuItem = ({IconComponent, text, onPress}: any) => {
   return (
@@ -47,7 +49,7 @@ const Profile = ({navigation}: any) => {
     } as const;
 
     try {
-      launchImageLibrary(options, response => {
+      launchImageLibrary(options, async response => {
         if (response.didCancel) {
           showMessage({
             message: 'Foto profile tidak jadi di ubah',
@@ -72,6 +74,46 @@ const Profile = ({navigation}: any) => {
           if (asset.base64) {
             const dataUri = `data:${asset.type};base64,${asset.base64}`;
             setProfileImage({uri: dataUri});
+
+            // Save base64 to Realtime Database under users/{uid}/photoBase64
+            try {
+              const uid = auth.currentUser?.uid;
+              if (uid) {
+                // write current profile (overwrite)
+                const profileRef = dbRef(database, `profile/${uid}`);
+                await set(profileRef, {
+                  photoBase64: dataUri,
+                  updatedAt: Date.now(),
+                });
+
+                // push history entry so multiple updates don't conflict and we have audit
+                const historyRef = dbRef(database, `profile/${uid}/history`);
+                await push(historyRef, {
+                  photo: dataUri,
+                  updatedAt: Date.now(),
+                });
+
+                showMessage({
+                  message: 'Foto profile tersimpan ke database',
+                  type: 'success',
+                  position: 'top',
+                });
+              } else {
+                showMessage({
+                  message: 'User tidak terautentikasi. Foto tidak disimpan.',
+                  type: 'danger',
+                  position: 'top',
+                });
+              }
+            } catch (dbErr) {
+              console.error('Save photo error:', dbErr);
+              showMessage({
+                message: 'Gagal menyimpan foto ke database',
+                description: String(dbErr),
+                type: 'danger',
+                position: 'top',
+              });
+            }
           } else if (asset.uri) {
             setProfileImage({uri: asset.uri});
           }
