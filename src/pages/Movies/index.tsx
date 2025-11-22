@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, ScrollView, StatusBar} from 'react-native';
 import Gap from '../../components/atoms/Gap';
 import MovieDetailHeader from '../../components/molecules/Header';
+import {database} from '../../../config/firebase';
+import {ref as dbRef, onValue, off} from 'firebase/database';
 
 const MovieDetail = ({navigation}) => {
   const movieImageUrl = require('../../assets/movies/Movies1.jpg');
+
+  const [title, setTitle] = useState('');
+  const [synTitle, setSynTitle] = useState('S');
+  const [synText, setSynText] = useState(``);
 
   const handleBackPress = () => {
     if (navigation) {
@@ -15,6 +21,45 @@ const MovieDetail = ({navigation}) => {
   const handlePlayPress = () => {
     console.log('Play button pressed!');
   };
+
+  useEffect(() => {
+    const moviesRef = dbRef(database, 'Movies');
+    const unsubscribe = onValue(
+      moviesRef,
+      snapshot => {
+        const data = snapshot.val();
+        if (!data) return;
+
+        // Jika Movies node langsung berisi fields (Judul, Sinopsis, Isi sinopsis)
+        // gunakan langsung. Jika Movies berisi child nodes (by id), ambil child pertama.
+        let movieData: any = data;
+        if (typeof data === 'object' && !('Judul' in data) && !('judul' in data) && !('title' in data)) {
+          const first = Object.values(data)[0];
+          if (first && typeof first === 'object') movieData = first;
+        }
+
+        if (movieData) {
+          setTitle(movieData.Judul || movieData.judul || movieData.title || title);
+          setSynTitle(movieData.Sinopsis || movieData.sinopsis || 'SINOPSIS');
+          setSynText(
+            movieData['Isi sinopsis'] || movieData.isi || movieData.isi_sinopsis || movieData.isiSinopsis || movieData.synopsis || synText,
+          );
+        }
+      },
+      err => {
+        console.error('Realtime read error (Movies):', err);
+      },
+    );
+
+    return () => {
+      try {
+        if (typeof unsubscribe === 'function') unsubscribe();
+        off(moviesRef);
+      } catch (e) {
+        console.warn('Error cleaning up movies listener', e);
+      }
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -41,7 +86,7 @@ const MovieDetail = ({navigation}) => {
           </View>
           <Gap height={16} />
 
-          <Text style={styles.title}>Who Am I (2014)</Text>
+          <Text style={styles.title}>{title}</Text>
           <Gap height={8} />
 
           <View style={styles.infoContainer}>
@@ -50,27 +95,9 @@ const MovieDetail = ({navigation}) => {
           </View>
           <Gap height={24} />
 
-          <Text style={styles.synopsisTitle}>SINOPSIS</Text>
+          <Text style={styles.synopsisTitle}>{synTitle}</Text>
           <Gap height={8} />
-          <Text style={styles.synopsisText}>
-            Benjamin Engel adalah seorang pemuda jenius komputer yang hidupnya
-            terasa hampa dan tak berarti. Ia sering merasa tak terlihat oleh
-            dunia, hingga suatu hari ia bertemu dengan Max, seorang hacker
-            karismatik yang memperkenalkannya pada dua teman lainnya, Stephan
-            dan Paul. Bersama-sama mereka membentuk kelompok hacker bernama CLAY
-            (Clowns Laughing At You).
-            {'\n\n'}
-            Awalnya, CLAY hanya melakukan peretasan iseng dan spektakuler untuk
-            mencari pengakuan publik. Namun, aksi mereka mulai menarik perhatian
-            organisasi hacker internasional berbahaya dan pihak Interpol,
-            terutama agen siber Hanne Lindberg, yang bertekad menangkap mereka.
-            {'\n\n'}
-            Semakin dalam Benjamin terlibat, semakin ia kehilangan kendali atas
-            batas antara dunia nyata dan dunia maya. Permainan identitas,
-            kebohongan, dan manipulasi pun dimulai—hingga akhirnya semua
-            mengarah pada pertanyaan besar: Siapa sebenarnya Benjamin, dan
-            seberapa jauh seseorang rela pergi demi diakui?
-          </Text>
+          <Text style={styles.synopsisText}>{synText}</Text>
         </View>
       </ScrollView>
     </View>
