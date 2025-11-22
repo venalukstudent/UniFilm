@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,15 +10,17 @@ import {
   Alert,
 } from 'react-native';
 import Footer from '../../components/molecules/Footer';
-const UserProfileImage = require('../../assets/Images/Profile.jpg');
+const UserProfileImage = require('../../assets/Images/profile.png');
 import LikesIcon from '../../assets/IconContent/likes.svg';
 import DownloadsIcon from '../../assets/IconContent/downloads.svg';
 import HistoryIcon from '../../assets/IconContent/history.svg';
 import LogoutIcon from '../../assets/IconContent/logout.svg';
 import {auth} from '../../../config/firebase';
 import {signOut} from 'firebase/auth';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {showMessage} from 'react-native-flash-message';
 
-const ProfileMenuItem = ({IconComponent, text, onPress}) => {
+const ProfileMenuItem = ({IconComponent, text, onPress}: any) => {
   return (
     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
       <IconComponent
@@ -32,8 +34,62 @@ const ProfileMenuItem = ({IconComponent, text, onPress}) => {
   );
 };
 
-const Profile = ({navigation}) => {
-  const handleAction = action => {
+const Profile = ({navigation}: any) => {
+  const [profileImage, setProfileImage] = useState<any>(UserProfileImage);
+
+  const pickImage = async () => {
+    const options = {
+      mediaType: 'photo',
+      maxHeight: 500,
+      maxWidth: 500,
+      quality: 0.8,
+      includeBase64: true,
+    } as const;
+
+    try {
+      launchImageLibrary(options, response => {
+        if (response.didCancel) {
+          showMessage({
+            message: 'Foto profile tidak jadi di ubah',
+            type: 'danger',
+            position: 'top',
+          });
+          return;
+        }
+
+        if (response.errorCode) {
+          showMessage({
+            message: 'Gagal memilih foto',
+            description: response.errorMessage || response.errorCode,
+            type: 'danger',
+            position: 'top',
+          });
+          return;
+        }
+
+        const asset = response.assets && response.assets[0];
+        if (asset) {
+          if (asset.base64) {
+            const dataUri = `data:${asset.type};base64,${asset.base64}`;
+            setProfileImage({uri: dataUri});
+          } else if (asset.uri) {
+            setProfileImage({uri: asset.uri});
+          }
+        }
+      });
+    } catch (err) {
+      const error = err as any;
+      console.error('pickImage error:', error);
+      showMessage({
+        message: 'Terjadi error saat memilih foto',
+        description: error?.message || String(error),
+        type: 'danger',
+        position: 'top',
+      });
+    }
+  };
+
+  const handleAction = (action: any) => {
     if (action === 'Logout') {
       Alert.alert('Logout', 'Are you sure you want to logout?', [
         {text: 'Cancel', style: 'cancel'},
@@ -62,7 +118,9 @@ const Profile = ({navigation}) => {
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.profileCard}>
-            <Image source={UserProfileImage} style={styles.profileImage} />
+            <TouchableOpacity onPress={pickImage} activeOpacity={0.8}>
+              <Image source={profileImage} style={styles.profileImage} />
+            </TouchableOpacity>
             <View style={styles.profileTextContainer}>
               <Text style={styles.greetingText}>Hi Adam,</Text>
               <Text style={styles.questionText}>
