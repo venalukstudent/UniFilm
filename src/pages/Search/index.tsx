@@ -76,7 +76,14 @@ const Search = ({navigation}) => {
         <Text style={styles.date}>{item.date}</Text>
         <Text style={styles.duration}>{item.duration}</Text>
         {renderStars(item.rating)}
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate(
+              ['1', '3'].includes(String(item.id)) ? 'Movies' : 'Series',
+              {movie: item},
+            )
+          }>
           <Text style={styles.buttonText}>Watch now</Text>
         </TouchableOpacity>
       </View>

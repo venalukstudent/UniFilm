@@ -1,23 +1,66 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   ScrollView,
   StatusBar,
   ImageBackground,
+  Text,
 } from 'react-native';
 import Gap from '../../components/atoms/Gap';
 import MovieDetailHeader from '../../components/molecules/Header';
+import {database} from '../../../config/firebase';
+import {ref as dbRef, onValue, off} from 'firebase/database';
 
 const SeriesDetail = ({navigation}) => {
   const seriesImageUrl = require('../../assets/Series/Series1/Series1.png');
+
+  const [title, setTitle] = useState('');
+  const [synTitle, setSynTitle] = useState('');
+  const [synText, setSynText] = useState(``);
 
   const handleBackPress = () => {
     if (navigation) {
       navigation.goBack();
     }
   };
+
+    useEffect(() => {
+      const seriesRef = dbRef(database, 'Series');
+      const unsubscribe = onValue(
+        seriesRef,
+        snapshot => {
+          const data = snapshot.val();
+          if (!data) return;
+
+          let seriesData: any = data;
+          if (typeof data === 'object' && !('Judul' in data) && !('judul' in data) && !('title' in data)) {
+            const first = Object.values(data)[0];
+            if (first && typeof first === 'object') seriesData = first;
+          }
+
+          if (seriesData) {
+            setTitle(seriesData.Judul || seriesData.judul || seriesData.title || title);
+            setSynTitle(seriesData.Sinopsis || seriesData.sinopsis || 'SINOPSIS');
+            setSynText(
+              seriesData['Isi sinopsis'] || seriesData.isi || seriesData.isi_sinopsis || seriesData.isiSinopsis || seriesData.synopsis || synText,
+            );
+          }
+        },
+        err => {
+          console.error('Realtime read error (Series):', err);
+        },
+      );
+
+      return () => {
+        try {
+          if (typeof unsubscribe === 'function') unsubscribe();
+          off(seriesRef);
+        } catch (e) {
+          console.warn('Error cleaning up series listener', e);
+        }
+      };
+    }, []);
 
   const handlePlayPress = () => {
     console.log('Play button pressed!');
@@ -83,7 +126,7 @@ const SeriesDetail = ({navigation}) => {
           </View>
           <Gap height={16} />
 
-          <Text style={styles.title}>The Last of Us</Text>
+          <Text style={styles.title}>{title}</Text>
           <Gap height={8} />
 
           <View style={styles.infoContainer}>
@@ -91,24 +134,9 @@ const SeriesDetail = ({navigation}) => {
           </View>
           <Gap height={24} />
 
-          <Text style={styles.synopsisTitle}>SINOPSIS</Text>
+          <Text style={styles.synopsisTitle}>{synTitle}</Text>
           <Gap height={8} />
-          <Text style={styles.synopsisText}>
-            Dua puluh tahun setelah dunia dihancurkan oleh wabah jamur Cordyceps
-            yang mengubah manusia menjadi makhluk ganas seperti zombie, seorang
-            penyintas keras bernama Joel Miller diberi tugas berbahaya:
-            mengantarkan seorang remaja bernama Ellie Williams melintasi Amerika
-            Serikat yang hancur. Ellie ternyata kebal terhadap infeksi, dan
-            mungkin menjadi kunci untuk menemukan obat bagi umat manusia.
-            Perjalanan mereka dipenuhi bahaya — bukan hanya dari para
-            “terinfeksi”, tetapi juga dari manusia lain yang kejam dan putus
-            asa. Di tengah kekacauan dunia pasca-apokaliptik, Joel dan Ellie
-            perlahan membangun ikatan layaknya ayah dan anak, yang diuji oleh
-            kehilangan, pengkhianatan, dan pilihan-pilihan moral yang sulit.
-            Serial ini menggambarkan perjuangan manusia untuk bertahan hidup dan
-            tetap memiliki harapan di dunia yang runtuh, dengan tema mendalam
-            tentang cinta, kehilangan, dan kemanusiaan.
-          </Text>
+          <Text style={styles.synopsisText}>{synText}</Text>
         </View>
       </ScrollView>
     </View>
