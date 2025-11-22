@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -20,7 +20,7 @@ import {signOut} from 'firebase/auth';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {push} from 'firebase/database';
 import {showMessage} from 'react-native-flash-message';
-import {ref as dbRef, set} from 'firebase/database';
+import {ref as dbRef, set, onValue, off} from 'firebase/database';
 
 const ProfileMenuItem = ({IconComponent, text, onPress}: any) => {
   return (
@@ -38,6 +38,10 @@ const ProfileMenuItem = ({IconComponent, text, onPress}: any) => {
 
 const Profile = ({navigation}: any) => {
   const [profileImage, setProfileImage] = useState<any>(UserProfileImage);
+  const [bioLine1, setBioLine1] = useState<string>('Hi Adam');
+  const [bioLine2, setBioLine2] = useState<string>(
+    'What movie do you want to watch today?',
+  );
 
   const pickImage = async () => {
     const options = {
@@ -130,6 +134,47 @@ const Profile = ({navigation}: any) => {
       });
     }
   };
+ 
+  useEffect(() => {
+    // Baca node `Bio` di Realtime Database (independen dari profile/users)
+    const bioRef = dbRef(database, `Bio`);
+    const unsubscribe = onValue(
+      bioRef,
+      snapshot => {
+        const data = snapshot.val();
+        if (data) {
+          // Baca `Bio.text1` dan `Bio.text2` secara terpisah dari database.
+          // text1 = greeting (mis. "Hi Adam"), text2 = subtitle (mis. "What movie...").
+          if (data.text1) {
+            setBioLine1(String(data.text1));
+          } else {
+            setBioLine1('');
+          }
+
+          if (data.text2) {
+            setBioLine2(String(data.text2));
+          } else {
+            setBioLine2('');
+          }
+
+          // optional: photo
+          if (data.photoBase64) setProfileImage({uri: data.photoBase64});
+        }
+      },
+      err => {
+        console.error('Realtime read error (Bio):', err);
+      },
+    );
+
+    return () => {
+      try {
+        if (typeof unsubscribe === 'function') unsubscribe();
+        off(bioRef);
+      } catch (e) {
+        console.warn('Error cleaning up realtime listener', e);
+      }
+    };
+  }, []);
 
   const handleAction = (action: any) => {
     if (action === 'Logout') {
@@ -164,10 +209,8 @@ const Profile = ({navigation}: any) => {
               <Image source={profileImage} style={styles.profileImage} />
             </TouchableOpacity>
             <View style={styles.profileTextContainer}>
-              <Text style={styles.greetingText}>Hi Adam,</Text>
-              <Text style={styles.questionText}>
-                What movie do you want to watch today?
-              </Text>
+              <Text style={styles.greetingText}>{bioLine1}</Text>
+              <Text style={styles.questionText}>{bioLine2}</Text>
             </View>
           </View>
 
@@ -195,7 +238,7 @@ const Profile = ({navigation}: any) => {
           </View>
         </ScrollView>
 
-        <Footer navigation={navigation} />
+        {React.createElement(Footer as any, {navigation})}
       </View>
     </SafeAreaView>
   );
