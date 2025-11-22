@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
+  Platform,
 } from 'react-native';
 import Footer from '../../components/molecules/Footer';
 const UserProfileImage = require('../../assets/Images/profile.png');
@@ -39,9 +40,7 @@ const ProfileMenuItem = ({IconComponent, text, onPress}: any) => {
 const Profile = ({navigation}: any) => {
   const [profileImage, setProfileImage] = useState<any>(UserProfileImage);
   const [bioLine1, setBioLine1] = useState<string>('');
-  const [bioLine2, setBioLine2] = useState<string>(
-    '',
-  );
+  const [bioLine2, setBioLine2] = useState<string>('');
 
   const pickImage = async () => {
     const options = {
@@ -52,77 +51,89 @@ const Profile = ({navigation}: any) => {
       includeBase64: true,
     } as const;
 
+    // Android: request runtime permission when needed
     try {
-      launchImageLibrary(options, async response => {
-        if (response.didCancel) {
-          showMessage({
-            message: 'Foto profile tidak jadi di ubah',
-            type: 'danger',
-            position: 'top',
-          });
-          return;
-        }
+      // Do not call PermissionsAndroid.request here because some emulator
+      // environments may not have an Activity attached and calling the
+      // permissions API can throw `Tried to use permissions API while not attached to an Activity`.
+      // Rely on `launchImageLibrary` to surface permission issues, and handle errors
+      // below with a user-friendly message suggesting a physical device or adding
+      // images to the emulator.
 
-        if (response.errorCode) {
-          showMessage({
-            message: 'Gagal memilih foto',
-            description: response.errorMessage || response.errorCode,
-            type: 'danger',
-            position: 'top',
-          });
-          return;
-        }
+      const result: any = await launchImageLibrary(options);
 
-        const asset = response.assets && response.assets[0];
-        if (asset) {
-          if (asset.base64) {
-            const dataUri = `data:${asset.type};base64,${asset.base64}`;
-            setProfileImage({uri: dataUri});
+      if (result.didCancel) {
+        showMessage({
+          message: 'Foto profile tidak jadi di ubah',
+          type: 'danger',
+          position: 'top',
+        });
+        return;
+      }
 
-            // Save base64 to Realtime Database under users/{uid}/photoBase64
-            try {
-              const uid = auth.currentUser?.uid;
-              if (uid) {
-                // write current profile (overwrite)
-                const profileRef = dbRef(database, `profile/${uid}`);
-                await set(profileRef, {
-                  photoBase64: dataUri,
-                  updatedAt: Date.now(),
-                });
+      if (result.errorCode) {
+        // Provide a clearer message for activity errors on emulator
+        const errCode = result.errorCode;
+        const errMsg = result.errorMessage || errCode;
+        console.error('ImagePicker error:', errCode, errMsg);
+        showMessage({
+          message: 'Gagal memilih foto',
+          description:
+            errCode === 'activity_error'
+              ? 'Activity error — coba jalankan di perangkat fisik atau pastikan ada aplikasi galeri di emulator.'
+              : String(errMsg),
+          type: 'danger',
+          position: 'top',
+        });
+        return;
+      }
 
-                // push history entry so multiple updates don't conflict and we have audit
-                const historyRef = dbRef(database, `profile/${uid}/history`);
-                await push(historyRef, {
-                  photo: dataUri,
-                  updatedAt: Date.now(),
-                });
+      const asset = result.assets && result.assets[0];
+      if (!asset) return;
 
-                showMessage({
-                  message: 'Foto profile tersimpan ke database',
-                  type: 'success',
-                  position: 'top',
-                });
-              } else {
-                showMessage({
-                  message: 'User tidak terautentikasi. Foto tidak disimpan.',
-                  type: 'danger',
-                  position: 'top',
-                });
-              }
-            } catch (dbErr) {
-              console.error('Save photo error:', dbErr);
-              showMessage({
-                message: 'Gagal menyimpan foto ke database',
-                description: String(dbErr),
-                type: 'danger',
-                position: 'top',
-              });
-            }
-          } else if (asset.uri) {
-            setProfileImage({uri: asset.uri});
+      if (asset.base64) {
+        const dataUri = `data:${asset.type};base64,${asset.base64}`;
+        setProfileImage({uri: dataUri});
+
+        try {
+          const uid = auth.currentUser?.uid;
+          if (uid) {
+            const profileRef = dbRef(database, `profile/${uid}`);
+            await set(profileRef, {
+              photoBase64: dataUri,
+              updatedAt: Date.now(),
+            });
+
+            const historyRef = dbRef(database, `profile/${uid}/history`);
+            await push(historyRef, {
+              photo: dataUri,
+              updatedAt: Date.now(),
+            });
+
+            showMessage({
+              message: 'Foto profile tersimpan ke database',
+              type: 'success',
+              position: 'top',
+            });
+          } else {
+            showMessage({
+              message: 'User tidak terautentikasi. Foto tidak disimpan.',
+              type: 'danger',
+              position: 'top',
+            });
           }
+        } catch (dbErr) {
+          console.error('Save photo error:', dbErr);
+          showMessage({
+            message: 'Gagal menyimpan foto ke database',
+            description: String(dbErr),
+            type: 'danger',
+            position: 'top',
+          });
         }
-      });
+      } else if (asset.uri) {
+        setProfileImage({uri: asset.uri});
+      }
     } catch (err) {
       const error = err as any;
       console.error('pickImage error:', error);
@@ -134,7 +145,7 @@ const Profile = ({navigation}: any) => {
       });
     }
   };
- 
+
   useEffect(() => {
     // Baca node `Bio` di Realtime Database (independen dari profile/users)
     const bioRef = dbRef(database, `Bio`);
@@ -185,11 +196,27 @@ const Profile = ({navigation}: any) => {
           onPress: async () => {
             try {
               await signOut(auth);
-              navigation.replace('SignIn');
+              showMessage({
+                message: 'Berhasil logout',
+                type: 'success',
+                position: 'top',
+              });
+              // Reset navigation stack to SignIn
+              try {
+                navigation.reset({index: 0, routes: [{name: 'SignIn'}]});
+              } catch (navErr) {
+                // fallback
+                navigation.replace && navigation.replace('SignIn');
+              }
             } catch (err) {
               const error = err as any;
               console.error('Logout error:', error);
-              Alert.alert('Error', error?.message || 'Failed to logout');
+              showMessage({
+                message: 'Gagal logout',
+                description: error?.message || 'Failed to logout',
+                type: 'danger',
+                position: 'top',
+              });
             }
           },
         },
