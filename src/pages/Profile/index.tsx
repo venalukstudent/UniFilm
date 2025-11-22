@@ -38,9 +38,9 @@ const ProfileMenuItem = ({IconComponent, text, onPress}: any) => {
 
 const Profile = ({navigation}: any) => {
   const [profileImage, setProfileImage] = useState<any>(UserProfileImage);
-  const [bioLine1, setBioLine1] = useState<string>('Hi Adam');
+  const [bioLine1, setBioLine1] = useState<string>('');
   const [bioLine2, setBioLine2] = useState<string>(
-    'What movie do you want to watch today?',
+    '',
   );
 
   const pickImage = async () => {
