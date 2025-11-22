@@ -21,9 +21,9 @@ const Home = ({navigation}) => {
     },
     {
       id: '2',
-      title: 'LARA ATI',
-      rating: 8.5,
-      image: require('../../assets/laraati.jpg'),
+      title: 'The LAST OF US',
+      rating: 8.2,
+      image: require('../../assets/thelastofus.jpg'),
     },
     {
       id: '3',
