@@ -57,7 +57,12 @@ const Home = ({navigation}) => {
   const renderMovie = ({item}) => (
     <TouchableOpacity
       style={styles.movieCard}
-      onPress={() => navigation.navigate('Movies', {movie: item})}>
+      onPress={() =>
+        navigation.navigate(
+          ['1', '2', '3'].includes(String(item.id)) ? 'Series' : 'Movies',
+          {movie: item},
+        )
+      }>
       <Image source={item.image} style={styles.movieImage} />
       <Text style={styles.movieTitle} numberOfLines={1}>
         {item.title}
