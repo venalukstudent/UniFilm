@@ -6,7 +6,7 @@ import {database} from '../../../config/firebase';
 import {ref as dbRef, onValue, off} from 'firebase/database';
 
 const MovieDetail = ({navigation}) => {
-  const movieImageUrl = require('../../assets/movies/Movies1.jpg');
+  const movieImageUrl = require('../../assets/movies/Movies2.jpg');
 
   const [title, setTitle] = useState('');
   const [synTitle, setSynTitle] = useState('S');
@@ -23,7 +23,7 @@ const MovieDetail = ({navigation}) => {
   };
 
   useEffect(() => {
-    const moviesRef = dbRef(database, 'Movies');
+    const moviesRef = dbRef(database, 'Movies2');
     const unsubscribe = onValue(
       moviesRef,
       snapshot => {

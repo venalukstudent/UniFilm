@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -57,12 +58,29 @@ const Home = ({navigation}) => {
   const renderMovie = ({item}) => (
     <TouchableOpacity
       style={styles.movieCard}
-      onPress={() =>
+      onPress={() => {
+        const idStr = String(item.id);
+        const titleLower = String(item.title || '').toLowerCase();
+        // Jika film Snowden (id 4) -> navigasi ke Movies2
+        if (idStr === '4' || titleLower.includes('snowden')) {
+          console.log(
+            'Home: Snowden pressed, attempting navigate to Movies2',
+            item,
+          );
+          try {
+            navigation.navigate('Movies2', {movie: item});
+          } catch (navErr) {
+            console.error('Navigation error navigating to Movies2:', navErr);
+            Alert.alert('Navigation error', String(navErr));
+          }
+          return;
+        }
+
         navigation.navigate(
-          ['1', '2', '3'].includes(String(item.id)) ? 'Series' : 'Movies',
+          ['1', '2', '3'].includes(idStr) ? 'Series' : 'Movies',
           {movie: item},
-        )
-      }>
+        );
+      }}>
       <Image source={item.image} style={styles.movieImage} />
       <Text style={styles.movieTitle} numberOfLines={1}>
         {item.title}
