@@ -7,11 +7,12 @@ import {ref as dbRef, onValue, off} from 'firebase/database';
 
 const MovieDetail = ({navigation, route}: any) => {
   // Prefer image passed via navigation params (route.params.movie.image),
-  // fallback to local asset for this page.
+  // fallback to a known existing local asset for this page.
+  // Movies5.jpg didn't exist and caused a compile error — use Movies1.jpg as safe fallback.
   const movieImageUrl =
-    route?.params?.movie?.image || require('../../assets/movies/Movies5.jpg');
+    route?.params?.movie?.image || require('../../assets/movies/Movies1.jpg');
 
-  console.log('Movies3 mounted, route.params=', route?.params);
+  console.log('Movies5 mounted, route.params=', route?.params);
 
   const [title, setTitle] = useState('');
   const [synTitle, setSynTitle] = useState('S');

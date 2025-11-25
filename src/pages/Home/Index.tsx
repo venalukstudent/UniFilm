@@ -91,6 +91,21 @@ const Home = ({navigation}) => {
           return;
         }
 
+        // Jika film dengan id 3 -> navigasi ke Movies5
+        if (idStr === '3') {
+          console.log(
+            'Home: id 3 pressed, attempting navigate to Movies5',
+            item,
+          );
+          try {
+            navigation.navigate('Movies5', {movie: item});
+          } catch (navErr) {
+            console.error('Navigation error navigating to Movies5:', navErr);
+            Alert.alert('Navigation error', String(navErr));
+          }
+          return;
+        }
+
         // Jika film dengan id 6 -> navigasi ke Movies4
         if (idStr === '6') {
           console.log(
