@@ -61,7 +61,7 @@ const Home = ({navigation}) => {
       onPress={() => {
         const idStr = String(item.id);
         const titleLower = String(item.title || '').toLowerCase();
-        // Jika film Snowden (id 4) -> navigasi ke Movies2
+        // Jika film SNOWDEN (id 4) -> navigasi ke Movies2
         if (idStr === '4' || titleLower.includes('snowden')) {
           console.log(
             'Home: Snowden pressed, attempting navigate to Movies2',
@@ -71,6 +71,21 @@ const Home = ({navigation}) => {
             navigation.navigate('Movies2', {movie: item});
           } catch (navErr) {
             console.error('Navigation error navigating to Movies2:', navErr);
+            Alert.alert('Navigation error', String(navErr));
+          }
+          return;
+        }
+
+        // Jika film dengan id 1 -> navigasi ke Movies3
+        if (idStr === '1') {
+          console.log(
+            'Home: id 1 pressed, attempting navigate to Movies3',
+            item,
+          );
+          try {
+            navigation.navigate('Movies3', {movie: item});
+          } catch (navErr) {
+            console.error('Navigation error navigating to Movies3:', navErr);
             Alert.alert('Navigation error', String(navErr));
           }
           return;

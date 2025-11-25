@@ -5,8 +5,13 @@ import MovieDetailHeader from '../../components/molecules/Header';
 import {database} from '../../../config/firebase';
 import {ref as dbRef, onValue, off} from 'firebase/database';
 
-const MovieDetail = ({navigation}) => {
-  const movieImageUrl = require('../../assets/movies/Movies2.jpg');
+const MovieDetail = ({navigation, route}: any) => {
+  // Prefer image passed via navigation params (route.params.movie.image),
+  // fallback to local asset for this page.
+  const movieImageUrl =
+    route?.params?.movie?.image || require('../../assets/movies/Movies3.jpg');
+
+  console.log('Movies3 mounted, route.params=', route?.params);
 
   const [title, setTitle] = useState('');
   const [synTitle, setSynTitle] = useState('S');
@@ -87,13 +92,13 @@ const MovieDetail = ({navigation}) => {
         <View style={styles.contentContainer}>
           <View style={styles.tagsContainer}>
             <View style={styles.tagWrapper}>
-              <Text style={styles.tagText}>CRIME</Text>
+              <Text style={styles.tagText}>ACTION</Text>
             </View>
             <View style={styles.tagWrapper}>
               <Text style={styles.tagText}>DRAMA</Text>
             </View>
             <View style={styles.tagWrapper}>
-              <Text style={styles.tagText}>MYSTERY</Text>
+              <Text style={styles.tagText}>COMEDY</Text>
             </View>
           </View>
           <Gap height={16} />

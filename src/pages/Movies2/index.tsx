@@ -87,7 +87,7 @@ const MovieDetail = ({navigation}) => {
         <View style={styles.contentContainer}>
           <View style={styles.tagsContainer}>
             <View style={styles.tagWrapper}>
-              <Text style={styles.tagText}>CRIME</Text>
+              <Text style={styles.tagText}>THRILLER</Text>
             </View>
             <View style={styles.tagWrapper}>
               <Text style={styles.tagText}>DRAMA</Text>
