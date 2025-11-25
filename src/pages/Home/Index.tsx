@@ -91,6 +91,21 @@ const Home = ({navigation}) => {
           return;
         }
 
+        // Jika film dengan id 6 -> navigasi ke Movies4
+        if (idStr === '6') {
+          console.log(
+            'Home: id 6 pressed, attempting navigate to Movies4',
+            item,
+          );
+          try {
+            navigation.navigate('Movies4', {movie: item});
+          } catch (navErr) {
+            console.error('Navigation error navigating to Movies4:', navErr);
+            Alert.alert('Navigation error', String(navErr));
+          }
+          return;
+        }
+
         navigation.navigate(
           ['1', '2', '3'].includes(idStr) ? 'Series' : 'Movies',
           {movie: item},
