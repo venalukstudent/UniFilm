@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Header from '../../components/molecules/Header2';
 import Gap from '../../components/atoms/Gap';
@@ -78,12 +79,27 @@ const Search = ({navigation}) => {
         {renderStars(item.rating)}
         <TouchableOpacity
           style={styles.button}
-          onPress={() =>
+          onPress={() => {
+            const idStr = String(item.id);
+            if (idStr === '1') {
+              console.log(
+                'Search: Watch now id 1 pressed, navigating to Movies6',
+                item,
+              );
+              try {
+                navigation.navigate('Movies6', {movie: item});
+              } catch (navErr) {
+                console.error('Navigation error to Movies6:', navErr);
+                Alert.alert('Navigation error', String(navErr));
+              }
+              return;
+            }
+
             navigation.navigate(
               ['1', '3'].includes(String(item.id)) ? 'Movies' : 'Series',
               {movie: item},
-            )
-          }>
+            );
+          }}>
           <Text style={styles.buttonText}>Watch now</Text>
         </TouchableOpacity>
       </View>

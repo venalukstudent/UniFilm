@@ -15,6 +15,7 @@ import Movies2 from './src/pages/Movies2';
 import Movies3 from './src/pages/Movies3';
 import Movies4 from './src/pages/Movies4';
 import Movies5 from './src/pages/Movies5';
+import Movies6 from './src/pages/Movies6';
 import Genres from './src/pages/Genres';
 import FlashMessage from 'react-native-flash-message';
 
@@ -83,6 +84,11 @@ const App = () => {
           <Stack.Screen
             name="Movies5"
             component={Movies5}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Movies6"
+            component={Movies6}
             options={{headerShown: false}}
           />
           <Stack.Screen
