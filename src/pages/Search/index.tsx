@@ -95,6 +95,20 @@ const Search = ({navigation}) => {
               return;
             }
 
+            if (idStr === '2') {
+              console.log(
+                'Search: Watch now id 2 pressed, navigating to Movies7',
+                item,
+              );
+              try {
+                navigation.navigate('Movies7', {movie: item});
+              } catch (navErr) {
+                console.error('Navigation error to Movies7:', navErr);
+                Alert.alert('Navigation error', String(navErr));
+              }
+              return;
+            }
+
             navigation.navigate(
               ['1', '3'].includes(String(item.id)) ? 'Movies' : 'Series',
               {movie: item},

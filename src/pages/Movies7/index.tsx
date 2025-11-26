@@ -10,9 +10,9 @@ const MovieDetail = ({navigation, route}: any) => {
   // fallback to a known existing local asset for this page.
   // Movies5.jpg didn't exist and caused a compile error — use Movies1.jpg as safe fallback.
   const movieImageUrl =
-    route?.params?.movie?.image || require('../../assets/annabelle.jpg');
+    route?.params?.movie?.image || require('../../assets/antman.jpg');
 
-  console.log('Movies6 mounted, route.params=', route?.params);
+  console.log('Movies7 mounted, route.params=', route?.params);
 
   const [title, setTitle] = useState('');
   const [synTitle, setSynTitle] = useState('S');
@@ -29,7 +29,7 @@ const MovieDetail = ({navigation, route}: any) => {
   };
 
   useEffect(() => {
-    const moviesRef = dbRef(database, 'Movies6');
+    const moviesRef = dbRef(database, 'Movies7');
     const unsubscribe = onValue(
       moviesRef,
       snapshot => {
@@ -93,13 +93,13 @@ const MovieDetail = ({navigation, route}: any) => {
         <View style={styles.contentContainer}>
           <View style={styles.tagsContainer}>
             <View style={styles.tagWrapper}>
-              <Text style={styles.tagText}>HORROR</Text>
+              <Text style={styles.tagText}>ACTION</Text>
             </View>
             <View style={styles.tagWrapper}>
-              <Text style={styles.tagText}>THRILLER</Text>
+              <Text style={styles.tagText}>COMEDY</Text>
             </View>
             <View style={styles.tagWrapper}>
-              <Text style={styles.tagText}>PYCHOLOGHY</Text>
+              <Text style={styles.tagText}>ADVENTURE</Text>
             </View>
           </View>
           <Gap height={16} />
@@ -108,8 +108,8 @@ const MovieDetail = ({navigation, route}: any) => {
           <Gap height={8} />
 
           <View style={styles.infoContainer}>
-            <Text style={styles.ratingText}>⭐ 3</Text>
-            <Text style={styles.durationText}>1j. 49m</Text>
+            <Text style={styles.ratingText}>⭐ 4</Text>
+            <Text style={styles.durationText}>1j. 47m</Text>
           </View>
           <Gap height={24} />
 

@@ -11,7 +11,7 @@ const MovieDetail = ({navigation, route}: any) => {
   const movieImageUrl =
     route?.params?.movie?.image || require('../../assets/movies/Movies4.jpg');
 
-  console.log('Movies3 mounted, route.params=', route?.params);
+  console.log('Movies4 mounted, route.params=', route?.params);
 
   const [title, setTitle] = useState('');
   const [synTitle, setSynTitle] = useState('S');
