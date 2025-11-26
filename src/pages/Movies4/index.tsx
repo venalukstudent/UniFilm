@@ -107,7 +107,7 @@ const MovieDetail = ({navigation, route}: any) => {
           <Gap height={8} />
 
           <View style={styles.infoContainer}>
-            <Text style={styles.ratingText}>⭐ 7,5</Text>
+            <Text style={styles.ratingText}>⭐ 8,5</Text>
             <Text style={styles.durationText}>1j. 46m</Text>
           </View>
           <Gap height={24} />

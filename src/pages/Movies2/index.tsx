@@ -102,7 +102,7 @@ const MovieDetail = ({navigation}) => {
           <Gap height={8} />
 
           <View style={styles.infoContainer}>
-            <Text style={styles.ratingText}>⭐ 7,5</Text>
+            <Text style={styles.ratingText}>⭐ 7,8</Text>
             <Text style={styles.durationText}>1j. 46m</Text>
           </View>
           <Gap height={24} />
