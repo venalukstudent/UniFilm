@@ -123,10 +123,19 @@ const Search = ({navigation}) => {
               return;
             }
 
-            navigation.navigate(
-              ['1', '3'].includes(String(item.id)) ? 'Movies' : 'Series',
-              {movie: item},
-            );
+            if (idStr === '4') {
+              console.log(
+                'Search: Watch now id 4 pressed, navigating to Movies9',
+                item,
+              );
+              try {
+                navigation.navigate('Movies9', {movie: item});
+              } catch (navErr) {
+                console.error('Navigation error to Movies9:', navErr);
+                Alert.alert('Navigation error', String(navErr));
+              }
+              return;
+            }
           }}>
           <Text style={styles.buttonText}>Watch now</Text>
         </TouchableOpacity>

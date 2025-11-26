@@ -10,7 +10,7 @@ const MovieDetail = ({navigation, route}: any) => {
   // fallback to a known existing local asset for this page.
   // Movies5.jpg didn't exist and caused a compile error — use Movies1.jpg as safe fallback.
   const movieImageUrl =
-    route?.params?.movie?.image || require('../../assets/despicableme.jpg');
+    route?.params?.movie?.image || require('../../assets/despicable.jpg');
 
   console.log('Movies9 mounted, route.params=', route?.params);
 

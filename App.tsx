@@ -18,6 +18,7 @@ import Movies5 from './src/pages/Movies5';
 import Movies6 from './src/pages/Movies6';
 import Movies7 from './src/pages/Movies7';
 import Movies8 from './src/pages/Movies8';
+import Movies9 from './src/pages/Movies9';
 import Genres from './src/pages/Genres';
 import FlashMessage from 'react-native-flash-message';
 
@@ -106,6 +107,11 @@ const App = () => {
           <Stack.Screen
             name="Genres"
             component={Genres}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Movies9"
+            component={Movies9}
             options={{headerShown: false}}
           />
         </Stack.Navigator>
